@@ -7,6 +7,10 @@ pipeline {
             steps {
                 sh 'mvn --version'
             }
+            {
+            mvn clean verify jacoco:report
+
+            }
         }
     }
 }
