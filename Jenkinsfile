@@ -1,24 +1,25 @@
-
-/* Requires the Docker Pipeline plugin */
 pipeline {
-   agent any
-  // agent { docker { image 'maven:3.9.0-eclipse-temurin-11' } }
-    stages {
-        stage('build') {
-            steps {
-                sh 'mvn --version'
-                sh 'mvn clean package'
-                sh 'mvn jacoco:report'
+  agent any
 
-            }
+  stages {
+    stage('Build') {
+      steps {
+        // Checkout the code from Git
+        git 'https://github.com/my-repo/my-project.git'
 
+        // Build the project with Maven
+        sh 'mvn clean package'
 
-
-        }
+        // Generate JaCoCo coverage report
+        sh 'mvn jacoco:report'
+      }
     }
-}
-post  {
+  }
+
+  post {
     always {
-    jacoco(execPattern: '**/target/*.exec')
+      // Publish JaCoCo coverage report
+      jacoco(execPattern: '**/target/*.exec')
     }
+  }
 }
