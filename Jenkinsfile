@@ -6,15 +6,18 @@ pipeline {
         stage('build') {
             steps {
                 sh 'mvn --version'
-            }
-            stage('Unit Test') {
-                steps {
-                    mvn clean verify jacoco:report
-            }
+                sh 'mvn clean package'
+                sh 'mvn jacoco:report'
 
             }
+
 
 
         }
+    }
+}
+post  {
+    always {
+    jacoco(execPattern: '**/target/*.exec')
     }
 }
