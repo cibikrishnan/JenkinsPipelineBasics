@@ -7,10 +7,14 @@ pipeline {
             steps {
                 sh 'mvn --version'
             }
-            {
-            mvn clean verify jacoco:report
+            stage('Unit Test') {
+                steps {
+                    mvn clean verify jacoco:report
+            }
 
             }
+
+
         }
     }
 }
