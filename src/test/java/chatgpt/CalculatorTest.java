@@ -22,7 +22,7 @@ public class CalculatorTest {
     }
     private static Stream<Arguments> additionParameters() {
         return Stream.of(
-                Arguments.of(-2, -2, -4)  ,
+                Arguments.of(-2, -3, -5)  ,
             Arguments.of(2, 3, 5),
            Arguments.of(-2, 2, 0)
 
